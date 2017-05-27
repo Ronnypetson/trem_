@@ -66,21 +66,33 @@ def get_all_densities_normalized(fnames,m):
         r.append(normalize_density(get_density(fname),m))
     return r
 
-def plot_densities(d,names):
+def plot_densities(d,names,ofile):
     n = len(d)
+    lin = (n/4)+1
+    col = 4
+    plt.xlabel('row')
+    plt.ylabel('pixel density')    
     for i in range(n):
         x = np.arange(0,len(d[i]),1)
-        plt.subplot(1,n,i+1)
+        plt.subplot(lin,col,i+1)
         plt.plot(x,d[i])
-        plt.xlabel('row')
-        plt.ylabel('pixel density')
         plt.title(names[i])
-    plt.savefig('letter_graphs.png')
+    plt.savefig(ofile)
     plt.show()
 
-letter_files = 'trem/h/*.jpg'
+sue_letters = '../Sue/trem/l/*.jpg'
+letter_files = 'trem/l/*.jpg'
 fnames = glob.glob(letter_files)
+snames = glob.glob(sue_letters)
+#
 min_len = count_min_width(fnames)
+min_sue = count_min_width(snames)
+#
 densities = get_all_densities_normalized(fnames,min_len)
-plot_densities(densities,fnames)
+sdensities = get_all_densities_normalized(snames,min_sue)
+#
+ofl = 'graphs.jpg'
+sfl = 'sue_graphs.jpg'
+plot_densities(densities,fnames,ofl)
+plot_densities(sdensities,snames,sfl)
 
