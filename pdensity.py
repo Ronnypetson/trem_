@@ -74,12 +74,17 @@ def plot_densities(d,names,ofile):
         lin = (n/3)+1
     col = 3
     plt.xlabel('row')
-    plt.ylabel('pixel density')    
+    plt.ylabel('pixel density')
     for i in range(n):
         x = np.arange(0,len(d[i]),1)
         plt.subplot(lin,col,i+1)
+        #plt.subplot(1,1,1)
         plt.plot(x,d[i])
+        #plt.plot(x,d[i],label=names[i])
         plt.title(names[i])
+        plt.tight_layout()
+        plt.yticks(np.arange(0, 255, 50))
+    #plt.legend(bbox_to_anchor=(0.93,1),loc=2,borderaxespad=0.)
     plt.savefig(ofile)
     plt.show()
 
