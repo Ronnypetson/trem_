@@ -68,8 +68,11 @@ def get_all_densities_normalized(fnames,m):
 
 def plot_densities(d,names,ofile):
     n = len(d)
-    lin = (n/4)+1
-    col = 4
+    if n%3 == 0:
+        lin = n/3
+    else:
+        lin = (n/3)+1
+    col = 3
     plt.xlabel('row')
     plt.ylabel('pixel density')    
     for i in range(n):
